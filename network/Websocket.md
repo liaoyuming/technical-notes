@@ -10,6 +10,7 @@ WebSocket 协议定义了一个 ws:// 和 wss:// 前缀，分别表示 WebSocket
 ### 握手
 
 例：
+
 客户端的握手如下：
 ```
     GET /chat HTTP/1.1
@@ -226,7 +227,7 @@ func (c *Client) writePump() {
 			if err != nil {
 				return
 			}
-			 // 发送 text 消息，opcode 设置 1
+			// 发送 text 消息，opcode 设置 1
 			w.Write(message)
             ...
             // 发送完成 FIN 为 1
@@ -276,14 +277,23 @@ func (h *Hub) run() {
 - 客户端（浏览器）
 ```
     conn = new WebSocket("ws://" + document.location.host + "/ws");
+    // 监听关闭
     conn.onclose = function (evt) {
         ...
     };
+    // 监听消息
     conn.onmessage = function (evt) {
         var messages = evt.data.split('\n');
         for (var i = 0; i < messages.length; i++) {
             ...
         }
+    };
+    document.getElementById("form").onsubmit = function () {
+        ...
+        // 发送消息
+        conn.send(msg.value);
+        msg.value = "";
+        return false;
     };
 ```
 
