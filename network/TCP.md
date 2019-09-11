@@ -1,9 +1,9 @@
 ## TCP 首部
-![TCP 首部](https://i.screenshot.net/lolvkhv)
+![TCP 首部](https://raw.githubusercontent.com/liaoyuming/notes/master/network/img/TCP-Header.png)
 
-![TCP-Header-01](https://i.screenshot.net/mxe35a4)
+![TCP-Header-01](https://raw.githubusercontent.com/liaoyuming/notes/master/network/img/TCP-Header-01.jpg)
 
-![TCP-Header-01](https://i.screenshot.net/m56l2f8)
+![TCP-Header-01](https://raw.githubusercontent.com/liaoyuming/notes/master/network/img/TCP-Header-02.jpg)
 
 #### 源端口号 Source Port 和目的端口号 Destination Port
 用于寻找发端和收端应用进程。这两个值加上 IP 首部中的源端 IP 地址和目的端 IP 地址唯一确定一个 TCP 连接。
@@ -51,12 +51,10 @@ TCP 的流量控制由连接的每一端通过声明的窗口大小来提供。�
 TCP 的选项字段中还包含了一个 TCP 窗口扩大因子，option-kind 为 3，option-length 为 3 个字节，option-data 取值范围0-14。窗口扩大因子用来扩大 TCP 窗口，可把原来 16bit 的窗口，扩大为 31bit。
 
 ## TCP 连接建立与终止
-<!-- ![TCP 连接和终止](https://i.screenshot.net/l8756i6) -->
- <img src="https://i.screenshot.net/l8756i6" width = "500" alt="TCP 连接和终止" align=center />
+![TCP 连接和终止时序图](https://raw.githubusercontent.com/liaoyuming/notes/master/network/img/TCP-sequence-chart-01.png)
+ ![TCP 连接和终止时序图](https://raw.githubusercontent.com/liaoyuming/notes/master/network/img/TCP-sequence-chart.png)
  
- ![TCP 连接和终止](https://i.screenshot.net/9mxvecp)
- 
- ![TCP 状态机](https://i.screenshot.net/9on26i9)
+ ![TCP 状态机](https://raw.githubusercontent.com/liaoyuming/notes/master/network/img/TCP-state-machine.jpg)
 
 ### TIME_WAIT 状态
 TIME_WAIT 状态也称为 2MSL 等待状态。每个具体TCP实现必须选择一个报文段最大生存时间 MSL (Maximum Segment Lifetime)。MSL 是任何报文段被丢弃前在网络内的最长时间，超过这个时间报文将被丢弃。
@@ -96,10 +94,10 @@ TCP协议提供了异常终止一个连接的方法，即给对方发送一个�
 ### 同时打开
 
 两个应用程序同时彼此执行主动打开的情况是可能的。每一方必须发送一个SYN，且这些SYN必须传递给对方。这需要每一方使用一个对方熟知的端口作为本地端口。另外，这种情况下需要进行 4 次握手。
-![TCP 两端同时打开](https://i.screenshot.net/2zxogcj)
+![TCP 两端同时打开](https://raw.githubusercontent.com/liaoyuming/notes/master/network/img/TCP-simultaneous-connect.png)
 
 ### 同时关闭
-![TCP 两端同时关闭](https://i.screenshot.net/21yp8f3)
+![TCP 两端同时关闭](https://raw.githubusercontent.com/liaoyuming/notes/master/network/img/TCP-simultaneous-close.png)
 
 ## TCP 数据传输
 TCP 通信量如果按照分组数量计算，有一半的 TCP 报文段包含成块数据(如 FTP、电子邮件和 Usenet 新闻 )，另一半则包含交互数据 (如 Telnet 和 Rlogin )。如果按字节计算，则成块数据与交互数据的比例约为 90% 和 10%。这是因为成块数据的报文段基本上都是满长度（full-sized）的（通常为 512 字节的用户数据），而交互数据则小得多。
@@ -144,7 +142,7 @@ Nagle算法的规则：
 
 发送方根据收到 ACK 当中的期望收到的下一个字节的序号n以及窗口m，加上当前已经发送的字节序号x，就能算出还可以发送的字节数 y=m-(x-n)
 
-![滑动窗口](https://i.screenshot.net/nrnz0ak)
+![滑动窗口](https://raw.githubusercontent.com/liaoyuming/notes/master/network/img/TCP-sliding-window.png)
 
 ##### 滑动窗口大小为 0 的情况
 滑动窗口大小为 0 时，发送端就不发数据了，但发送端会使用一个持续定时器 (persist timer)来周期性地 向接收方查询，以便发现窗口是否已增大。当 persist timer 到期时，TCP 发送方尝试恢复发送一个小的 ZWP 包（Zero Window Probe），期待接收方回复一个带着新的接收窗口大小的确认包。一般 ZWP 包会设置成3次，每次大约30-60 秒，如果3次过后还是0的话，有的 TCP 实现就会发 RST 把链接断了
@@ -168,7 +166,7 @@ TCP 提供可靠的运输层。因此需要确认从另一端收到的数据。�
 
 如果网络上的延时突然增加，那么，TCP对这个事做出的应对只有重传数据，但是，重传会导致网络的负担更重，于是会导致更大的延迟以及更多的丢包。这个情况就会进入恶性循环，最终可能会拖垮整个网络。因此，TCP 必须在拥塞发生的时候，控制发送的数据包数量
 
-![拥塞控制](https://i.screenshot.net/re9jmbr)
+![拥塞控制](https://raw.githubusercontent.com/liaoyuming/notes/master/network/img/TCP-congestion-control.jpg)
 
 拥塞控制主要有以下四个算法
 - 慢启动
@@ -186,9 +184,9 @@ TCP 提供可靠的运输层。因此需要确认从另一端收到的数据。�
     - 慢启动算法初始设置 cwnd 为 1 个报文段，此后每收到一个确认就加 1 
     - 拥塞避免算法要求每次收到一个确认时将 cwnd = cwnd + 1/cwnd，每过一个 RTT 时，cwnd = cwnd + 1
 
-![慢启动](https://i.screenshot.net/74np4fd)
+![慢启动](https://raw.githubusercontent.com/liaoyuming/notes/master/network/img/TCP-slow-start.png)
 
-![慢启动和拥塞避免](https://i.screenshot.net/4e8d9bg)
+![慢启动和拥塞避免](https://raw.githubusercontent.com/liaoyuming/notes/master/network/img/TCP-slow-start-congestion-avoidance.jpg)
 
 
 #### 快速重传（fast retransmit）和快速恢复（fast recovery）
@@ -200,9 +198,9 @@ TCP 提供可靠的运输层。因此需要确认从另一端收到的数据。�
 - 每次收到另一个重复的 ACK 时，cwnd 增加 1 个报文段大小并发送 1 个分组(如果新的 cwnd 允许发送)。
 - 当下一个确认新数据的 ACK 到达时，设置 cwnd 为 ssthresh。这个 ACK 应该是在进行重传后的一个往返时间内对步骤1中重传的确认。另外，这个 ACK 也应该是对丢失的分组和收到的第1个重复的 ACK 之间的所有中间报文段的确认 
 
-![快速重传](https://i.screenshot.net/dnmgna6)
+![快速重传](https://raw.githubusercontent.com/liaoyuming/notes/master/network/img/TCP-fast-retransmit.png)
 
-![快速重传和快速恢复](https://i.screenshot.net/ygj5mcw)
+![快速重传和快速恢复](https://raw.githubusercontent.com/liaoyuming/notes/master/network/img/TCP-fast-retransmit-recovery.jpg)
 
 另外，收到第3个重复的 ACK 的情况下，没有执行慢启动，是因为收到重复的 ACK 不仅仅告诉我们一个分组丢失了。由于接收方只有在收到另一个报文段时才会产生重复的 ACK，而该报文段已经离开了网络并进入了接收方的缓存。也就是说，在收发两端之间仍然有流动的数据，而我们并不想执行慢启动来突然减少数据流。
 
@@ -269,11 +267,6 @@ TCP socket 的 SO_KEEPALIVE option，主要适用于这种场景：连接的双�
 #### 滑动窗口和拥塞窗口分别是什么，各有什么作用
 
 #### 为什么说 TCP 面向字节流传输
-
-
-
-
-
 
 ---
 参考自
