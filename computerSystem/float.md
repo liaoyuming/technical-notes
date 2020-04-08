@@ -23,6 +23,7 @@ V = (-1)^S * M * 2^E
 ### float and double
 #### 32位的浮点数 float
 - 组成
+- 
     - 最高的1位是符号位 S
     - 接着的8位是指数E
     - 剩下的23位为有效数字M
@@ -56,4 +57,5 @@ V = (-1)^S * M * 2^E
 
 ---
 参考自
+
 - [浮点数的二进制表示](http://www.ruanyifeng.com/blog/2010/06/ieee_floating-point_representation.html)

@@ -1,3 +1,5 @@
+## KMP 算法
+
 看本文内容时，推荐先看下这篇文章[字符串匹配的KMP算法](http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html)，能帮助有个大致的理解。
 
 ### 定义
@@ -106,4 +108,5 @@ func getNext(needle string) []int {
 
 ---
 参考文献
+
 - [KMP 算法](http://wiki.jikexueyuan.com/project/kmp-algorithm/define.html)
