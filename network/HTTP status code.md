@@ -1,4 +1,8 @@
+## HTTP Status Code
+![HTTP 状态码流程图](./img/HTTP-decision-diagram.png)
+
 ### 100 Continue
+
 表示目前为止一切正常, 客户端应该继续请求, 如果已完成请求则忽略.
 
 为了让服务器检查请求的首部, 客户端必须在发送请求实体前, 在初始化请求中发送 Expect: 100-continue 首部并接收 100 Continue 响应状态码.
@@ -165,7 +169,7 @@ Content-Encoding: gzip
 
 ### 500 Internal Server Error
 表示所请求的服务器遇到意外的情况并阻止其执行请求。
- 
+
 举例：代码语法错误；php代码运行内存超了内存限制 memory_limit；nginx config 配置错误；
 
 
@@ -208,15 +212,22 @@ Retry-After: 120
 举例：代码执行时间超时，或死循环了。
 
 
-## 问题
+## 常见问题
 #### 500 和 503 分别表示什么，以及哪些情况下会用到。
+
+####  502 和 504 的区别
+
+1. 502  和 504 本质上都是超时引起的，前者是网关 connect 或者 send 超时，后者是网关 read 超时。
+2. 具体例子演示请看这篇文章：[nginx 502 和 504 超时演示](http://wulfric.me/2018/07/nginx-demo/)
+
 #### 401 和 403 的区别
 1. 401 Unauthorized 用于丢失或错误的身份验证，响应头包含 www-Authenticate 来描述如何验证，通常由 Web 服务器 返回，而不是应用程序，具有暂时性，服务器会要求重试
+
 2. 403 Forbidden 是指已经验过身份验证，但是在某项请求资源操作上没有权限，具有永久性，与应用程序逻辑相关。
+
 3. 参考 [403 Forbidden vs 401 Unauthorized HTTP responses](https://stackoverflow.com/questions/3297048/403-forbidden-vs-401-unauthorized-http-responses)
 
-
-
+   
 
 ---
 参考自
