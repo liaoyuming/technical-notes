@@ -51,7 +51,7 @@ TCP 的流量控制由连接的每一端通过声明的窗口大小来提供。�
 TCP 的选项字段中还包含了一个 TCP 窗口扩大因子，option-kind 为 3，option-length 为 3 个字节，option-data 取值范围0-14。窗口扩大因子用来扩大 TCP 窗口，可把原来 16bit 的窗口，扩大为 31bit。
 
 ## TCP 连接建立与终止
-![TCP 连接和终止时序图](/img/TCP-sequence-chart-01.png)
+![TCP 连接和终止时序图](./img/TCP-sequence-chart-01.png)
  ![TCP 连接和终止时序图](./img/TCP-sequence-chart.png)
 
  ![TCP 状态机](./img/TCP-state-machine.jpg)
