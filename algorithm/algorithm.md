@@ -1,5 +1,7 @@
 ## 算法
 
+掌握算法的唯一方式：多做题
+
 ### 排序算法
 
 [推荐文章](https://www.cnblogs.com/onepixel/p/7674659.html)
@@ -130,11 +132,10 @@
 
 - 双指针法
 
-### 字符串匹配算法
+- 字符串匹配算法
+  - [KMP 算法](./KMP.md)
 
-- [KMP算法](./KMP.md)
-
-### 蓄水池抽样算法
+- 蓄水池抽样算法
 
 ### 性能分析
 
@@ -142,55 +143,153 @@
 
 - 空间复杂度
 
-### 算法题
+### 算法题 
 
-- 链表
-  [https://juejin.im/post/5c7c71c6f265da2dcb679e85 ](https://juejin.im/post/5c7c71c6f265da2dcb679e85)
+使用 △ 标记面试常考值，最大 5
 
-- 栈
+#### 链表 △△△△△
+
+[推荐文章 ](https://juejin.im/post/5c7c71c6f265da2dcb679e85)
+
+常见题：
+
+[链表反转](https://leetcode-cn.com/problems/reverse-linked-list/), [进阶版](https://leetcode-cn.com/problems/reverse-linked-list-ii/)
+
+[有序链表合并](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
+
+[相交链表](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
+
+[环形链表](https://leetcode-cn.com/problems/linked-list-cycle-ii/)
+
+[旋转链表](https://leetcode-cn.com/problems/rotate-list/)
+
+[复制带随机指针的链表](https://leetcode-cn.com/problems/copy-list-with-random-pointer/)
+
+等等，
+
+leetcode 里链表这一类题基本都要做 [跳转地址](https://leetcode-cn.com/problemset/all/?search=链表)
+
+#### 树 △△△△
+
+常见题：
+
+[二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
+
+[翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/)
+
+[二叉树的层序遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
+
+[从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
+
+[二叉树的右视图](https://leetcode-cn.com/problems/binary-tree-right-side-view/)
+
+[二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+
+[最深叶节点的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-deepest-leaves/)
+
+树这类题，偏简单，基本都能往递归的思路去实现，做个二三十道题就差不多了
+
+#### 栈 △△△
 
   - 单调栈
 
-- 队列
+常见题：
 
-- 堆
+[有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
 
-- 贪心
+[用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/)
 
-- 递归
+[最小栈](https://leetcode-cn.com/problems/min-stack/)
 
-- 分治
+[每日温度](https://leetcode-cn.com/problems/daily-temperatures/)
 
-- 回溯
+#### 队列 △
 
-- 树、图
+常见题：
 
-- 二分查找
+[用队列实现栈](https://leetcode-cn.com/problems/implement-stack-using-queues/)
+
+#### 堆 △
+
+能手写个堆排序差不多了
+
+#### 贪心 △
+
+例题：
+
+[分发糖果](https://leetcode-cn.com/problems/candy/)
+
+#### 递归 △△△△△
+
+常见题
+
+[爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
+
+[斐波那契数列](https://leetcode-cn.com/problems/fei-bo-na-qi-shu-lie-lcof/)
+
+另，多用于回溯算法，分支算法，二叉树、排序等相关题目，是非常基础的算法思想
+
+#### 分治 △△△
+
+分治，即”分而治之”，就是把一个复杂的问题分成两个或更多的相同或相似的子问题，直到最后子问题可以简单的直接求解，原问题的解即子问题的解的合并。
+
+常见题：
+
+归并排序
+
+快速排序
+
+[合并K个排序链表](https://leetcode-cn.com/problems/merge-k-sorted-lists/)
+
+[数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/)
+
+#### 回溯 △△△
+
+回溯算法实际上一个类似枚举的搜索尝试过程，主要是在搜索尝试过程中寻找问题的解，当发现已不满足求解条件时，就 “回溯” 返回，尝试别的路径。
+
+常见题：
+
+[全排列](https://leetcode-cn.com/problems/permutations/)
+
+[组合总和](https://leetcode-cn.com/problems/combination-sum/)
+
+[子集](https://leetcode-cn.com/problems/subsets/)
+
+[分割回文串](https://leetcode-cn.com/problems/palindrome-partitioning/)
+
+#### 图   
+
+会拓扑排序、dfs、bfs 就行，一般考的比较少
+
+#### 二分查找 △△△△
 
   - 二叉查找树
 
-- 位运算
+常见题：
+
+
+#### 位运算 △△△
 
   - 异或
 
-- 哈希表
+#### 哈希表
 
-- 字符串
+#### 字符串
 
-- 搜索
+#### 搜索 △△△
 
   - 深度优先搜索
 
   - 广度优先搜索
 
-- 动态规划
+#### 动态规划 △△△
 
-- 双指针
+#### 双指针  △△△
 
-- 滑动窗口
+#### 滑动窗口  △
 
-- 位图
+#### 位图  △
 
   - 海量数据去重和排序
 
-- 外排序
+#### 外排序  △
