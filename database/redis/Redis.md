@@ -105,41 +105,83 @@ typedef struct list{
 
 ##### 实现
 
+![字典结构](./img/dict.png)
+
 数据结构：
 
 ```c
+/*
+ * 字典
+ *
+ * 每个字典使用两个哈希表，用于实现渐进式 rehash
+ */
+typedef struct dict {
+    // 特定于类型的处理函数
+    dictType *type;
+    // 类型处理函数的私有数据
+    void *privdata;
+    // 哈希表（2 个），ht[0] 是主要使用的哈希表， 而 ht[1] 则只有在对 ht[0] 哈希表进行 rehash 时才使用
+    dictht ht[2];
+    // 记录 rehash 进度的标志，值为 -1 表示 rehash 未进行
+    int rehashidx;
+    // 当前正在运作的安全迭代器数量
+    int iterators;
+} dict;
+
 typedef struct dictht{
-    //哈希表数组
+    // 哈希表数组 
     dictEntry **table;
-    //哈希表大小
+    // 哈希表大小
     unsigned long size;
   	// 哈希表大小掩码，用于计算索引值
-  	// 总是等于 size-1
     unsigned long sizemask;
-    //该hash表已有节点数量
+    // 该 hash 表已有节点数量
     unsigned long used;
 }
 
 typedef struct dictEntry{
+   // 键
    void *key;
+   // 值
    union{
       void *val;
       uint_64_tu64;
       int64_ts64;
      } v
-     struct dictEntry *next;
+   // 下个节点指针, 这里使用链地址法来解决哈希冲突
+   struct dictEntry *next;
 }dictEntry;
 ```
 
 特点：
 
-- 哈希
+- 哈希表实现
+- 哈希冲突使用链地址法解决
+- 渐进式 rehash
 
-- 键冲突
+##### 渐进式 rehash
+判断条件：
 
-	- 链地址法
+在每次添加新键值对时，都会对检查 ht[0] 的 size 和 used 属性，计算出它们之间的比率 `ratio = used / size`
 
-- 哈希的扩展和收缩
+  - 需要 rehash: 如果 ratio >= 1,  `dict_can_resize` 为真。 在诸如后台持久化（bgsave）的时候，需要一般不处理 rehash，除非强制执行
+  - 强制 rehash: 如果 ratio > `dict_force_resize_ratio` (一般默认配置为 5)，
+
+触发时机：
+
+- 在增删查时惰性触发，并且只有`ht[0]->table` 哈希表第一个不为空的索引上的所有节点就会全部迁移到 `ht[1]->table`
+- 在 Redis 的定时任务（server cron job）中执行，对数据库字典进行主动 rehash 
+
+rehash 过程中的其他注意点：
+
+- 删查等操作时， ht[0] 和 ht[1] 都要执行
+
+- 添加操作，只在 ht[1] 中执行，ht[0] 只减不增
+
+收缩 rehash
+
+条件： 如果 ratio < `REDIS_HT_MINFILL`(一般默认为 10% )
+
 
 ###### 命令
 
